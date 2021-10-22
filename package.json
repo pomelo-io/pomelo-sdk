@@ -1,0 +1,31 @@
+{
+  "name": "pomelo-sdk",
+  "version": "0.0.1",
+  "description": "Pomelo SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run test && npm run build",
+    "test": "jest --coverage __tests__/**.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pomelo-io/pomelo-sdk.git"
+  },
+  "author": "Denis Carriere <denis@eosnation.io>",
+  "license": "MIT",
+  "homepage": "https://github.com/pomelo-io/pomelo-sdk",
+  "devDependencies": {
+    "@types/jest": "*",
+    "jest": "*",
+    "ts-jest": "*",
+    "typescript": "*"
+  },
+  "dependencies": {
+    "axios": "^0.23.0"
+  }
+}

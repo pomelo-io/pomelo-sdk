@@ -1,7 +1,7 @@
 # Pomelo SDK
 
 [![Build Status](https://travis-ci.org/pomelo-io/pomelo-sdk.svg?branch=master)](https://travis-ci.org/pomelo-io/pomelo-sdk)
-[![npm version](https://badge.fury.io/js/sxjs.svg)](https://badge.fury.io/js/sxjs)
+[![npm version](https://badge.fury.io/js/pomelo-sdk.svg)](https://badge.fury.io/js/pomelo-sdk)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/pomelo-io/pomelo-sdk/master/LICENSE)
 
 > Pomelo - Javascript Library

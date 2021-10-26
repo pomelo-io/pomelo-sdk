@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Globals, Round, Season, Match, User } from "../types"
+import { Globals, Round, Season, Match, User, LoginAccount, Profile } from "../types"
 
 const FUNCTIONS_BASE_URL = 'https://functions.eosn.io/v1/pomelo/'
 
@@ -17,13 +17,6 @@ export async function get_rounds() {
   return results;
 }
 
-export async function get_round( round_id: number ) {
-  for ( const row of await get_rounds() ) {
-    if ( row.round_id == round_id ) return row;
-  }
-  throw new Error("[round_id] does not exists");
-}
-
 export async function get_seasons() {
   const results: Season[] = [];
   const { data } = await axios.get<{rows: Season[]}>(FUNCTIONS_BASE_URL + "seasons");
@@ -31,13 +24,6 @@ export async function get_seasons() {
     results.push(row);
   }
   return results;
-}
-
-export async function get_season( season_id: number ): Promise<Season> {
-  for ( const row of await get_seasons() ) {
-    if ( row.season_id == season_id ) return row;
-  }
-  throw new Error("[season_id] does not exists");
 }
 
 export async function get_grants(grant_id?: string) {
@@ -62,11 +48,7 @@ export async function get_users(round_id: number, eosn_id?: string) {
   return results;
 }
 
-export async function get_user(round_id: number, eosn_id: string) {
-  return (await get_users(round_id, eosn_id) )[0] || {};
-}
-
-export async function get_matches(round_id: number, grant_id?: string) {
+export async function get_match(round_id: number, grant_id?: string) {
   const results: Match[] = [];
   const params: any = {}
   if ( grant_id ) params.grant_id = grant_id;
@@ -77,6 +59,24 @@ export async function get_matches(round_id: number, grant_id?: string) {
   return results;
 }
 
-export async function get_match(round_id: number, grant_id: string) {
-  return (await get_matches(round_id, grant_id) )[0] || {};
+export async function get_login_accounts(account?: string) {
+  const results: LoginAccount[] = [];
+  const params: any = {}
+  if ( account ) params.account = account;
+  const { data } = await axios.get<{rows: LoginAccount[]}>(FUNCTIONS_BASE_URL + `login/accounts`, {params});
+  for ( const row of data.rows) {
+    results.push(row);
+  }
+  return results;
+}
+
+export async function get_pfp_profiles(account?: string) {
+  const results: Profile[] = [];
+  const params: any = {}
+  if ( account ) params.account = account;
+  const { data } = await axios.get<{rows: Profile[]}>(FUNCTIONS_BASE_URL + `pfp/profiles`, {params});
+  for ( const row of data.rows) {
+    results.push(row);
+  }
+  return results;
 }

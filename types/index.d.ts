@@ -63,3 +63,25 @@ export interface Match {
   total_users: number;        // 2
   updated_at: string;         // '2021-10-22T01:40:49'
 }
+
+export interface LoginAccount {
+  account: string;          // 'fred.gm'
+  user_id: string;          // '54221.d.eosn'
+}
+
+export interface PFP {
+  asset_id?: number            // '2199023384632'
+  collection_name?: string     // 'genesis.eden'
+  schema_name?: string         // 'members'
+  template_id?: number         // 1423
+  img?: string                 // 'QmSSdxU5sXfAjvNkuri24itbr9Hv2zpcPM6pesV7Z5dSMP'
+}
+
+export interface Profile {
+  owner: string             // 'keyes'
+  avatar: PFP,
+  border: PFP,
+  badge: PFP,
+  created_at: string        // '2021-10-26T02:19:53'
+  last_updated: string      // '2021-10-26T02:19:53'
+}

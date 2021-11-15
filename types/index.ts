@@ -39,6 +39,17 @@ export interface Season {
   updated_at: string;             // '2021-10-21T17:28:28'
 }
 
+export interface Grant {
+  id: string
+  type: string
+  author_user_id: string
+  funding_account: string
+  accepted_tokens: string[]
+  status: string
+  created_at: string
+  updated_at: string
+}
+
 export interface Contribution {
   id: string;
   value: number;

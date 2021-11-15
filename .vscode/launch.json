@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug pomelo.sdk tests",
+        "type": "node",
+        "request": "launch",
+        "env": { "CI": "true" },
+        "runtimeExecutable": "jest",
+        "args": [],
+        "cwd": "${workspaceRoot}",
+        "protocol": "inspector",
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
+      }
+    ]
+  }

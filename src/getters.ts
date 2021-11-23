@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Globals, Round, Season, Match, User, LoginAccount, Profile } from "../types"
+import { Globals, Round, Season, Grant, Match, User, LoginAccount, Profile } from "../types"
 
 const FUNCTIONS_BASE_URL = 'https://functions.eosn.io/v1/pomelo/'
 
@@ -27,10 +27,10 @@ export async function get_seasons() {
 }
 
 export async function get_grants(grant_id?: string) {
-  const results: Season[] = [];
+  const results: Grant[] = [];
   const params: any = {}
   if ( grant_id ) params.grant_id = grant_id;
-  const { data } = await axios.get<{rows: Season[]}>(FUNCTIONS_BASE_URL + "grants", {params});
+  const { data } = await axios.get<{rows: Grant[]}>(FUNCTIONS_BASE_URL + "grants", {params});
   for ( const row of data.rows) {
     results.push(row);
   }

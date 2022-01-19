@@ -1,7 +1,8 @@
 import axios from "axios";
-import { Globals, Round, Season, Grant, Match, User, LoginAccount, Profile } from "../types"
+import { Globals, Round, Season, Grant, Match, User, LoginAccount, Profile, GrantClaim } from "../types"
 
 const FUNCTIONS_BASE_URL = 'https://functions.eosn.io/v1/pomelo/'
+const EOSIO_BASE_URL = 'https://eos.eosn.io'
 
 export async function get_globals(): Promise<Globals> {
   const { data } = await axios.get<{rows: Globals[]}>(FUNCTIONS_BASE_URL + "globals");
@@ -80,3 +81,27 @@ export async function get_pfp_profiles(account?: string) {
   }
   return results;
 }
+
+export async function get_grant_claims(round_id: number, eosn_id?: string, code = "claim.pomelo" ) {
+  const results: GrantClaim[] = [];
+  const payload: any = {
+    code,
+    scope: round_id,
+    table: "claims",
+    json: true,
+  }
+  if ( eosn_id ) {
+    payload.lower_bound = eosn_id;
+    payload.upper_bound = eosn_id;
+    payload.index_position = "secondary";
+    payload.key_type = "name"
+  }
+  const { data } = await axios.post<{rows: GrantClaim[]}>(EOSIO_BASE_URL + `/v1/chain/get_table_rows`, payload );
+  for ( const row of data.rows) {
+    results.push(row);
+  }
+  return results;
+}
+
+// get_grant_claims(101).then( data => console.log(data)).catch(e => console.error(e))
+// get_grant_claims(101, "3332221.eosn").then( data => console.log(data)).catch(e => console.error(e))

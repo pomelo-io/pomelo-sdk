@@ -41,3 +41,8 @@ test("get_pfp_profiles #1 (pass)", async () => {
     const results = await pomelo.get_pfp_profiles();
     expect( results.length ).toBeTruthy;
 });
+
+test("get_grant_claims #1 (pass)", async () => {
+    const results = await pomelo.get_pfp_profiles();
+    expect( results.length ).toBeTruthy;
+});

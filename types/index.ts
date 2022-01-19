@@ -96,3 +96,15 @@ export interface Profile {
   created_at: string        // '2021-10-26T02:19:53'
   last_updated: string      // '2021-10-26T02:19:53'
 }
+
+export interface GrantClaim {
+  grant_id: string;
+  author_user_id: string;
+  funding_account: string;
+  approved: number;
+  claim: ExtendedAsset,
+  claimed: ExtendedAsset,
+  claimed_at: Date;
+  created_at: Date;
+  expires_at: Date;
+}

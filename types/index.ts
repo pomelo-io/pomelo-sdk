@@ -92,7 +92,7 @@ export interface Profile {
   owner: string             // 'keyes'
   avatar: PFP,
   border: PFP,
-  badge: PFP,
+  banner: PFP,
   created_at: string        // '2021-10-26T02:19:53'
   last_updated: string      // '2021-10-26T02:19:53'
 }

@@ -81,11 +81,13 @@ export interface LoginAccount {
 }
 
 export interface PFP {
-  asset_id?: number            // '2199023384632'
-  collection_name?: string     // 'genesis.eden'
-  schema_name?: string         // 'members'
-  template_id?: number         // 1423
-  img?: string                 // 'QmSSdxU5sXfAjvNkuri24itbr9Hv2zpcPM6pesV7Z5dSMP'
+  asset_id?: number                   // 2199023384632
+  collection_name?: string            // 'genesis.eden'
+  schema_name?: string                // 'members'
+  template_id?: number                // 1423
+  metadata?: {[key: string]: string}  // {'img': 'QmSSdxU5sXfAjvNkuri24itbr9Hv2zpcPM6pesV7Z5dSMP', 'video': 'QmSSdxU5sXfAjvNkuri24itbr9Hv2zpcPM6pesV7Z5dSMP'}
+  last_updated?: string               // '2021-10-26T02:19:53'
+  last_updated_epoch?: number         // 1658329344
 }
 
 export interface Profile {
@@ -93,8 +95,7 @@ export interface Profile {
   avatar: PFP,
   border: PFP,
   banner: PFP,
-  created_at: string        // '2021-10-26T02:19:53'
-  last_updated: string      // '2021-10-26T02:19:53'
+  eosn_id?: string;
 }
 
 export interface GrantClaim {

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Globals, Round, Season, Grant, Match, User, LoginAccount, Profile, GrantClaim } from "../types"
 
 const FUNCTIONS_BASE_URL = 'https://functions.eosn.io/v1/pomelo/'
+const EDGE_BASE_URL = 'https://edge.pomelo.io/api'
 const EOSIO_BASE_URL = 'https://eos.eosn.io'
 
 export async function get_globals(): Promise<Globals> {
@@ -71,15 +72,24 @@ export async function get_login_accounts(account?: string) {
   return results;
 }
 
-export async function get_pfp_profiles(account?: string) {
-  const results: Profile[] = [];
-  const params: any = {}
-  if ( account ) params.account = account;
-  const { data } = await axios.get<{rows: Profile[]}>(FUNCTIONS_BASE_URL + `pfp/profiles`, {params});
-  for ( const row of data.rows) {
-    results.push(row);
+export async function get_pfp_profiles(dev = false, account?: string) {
+  const params: any = { chain: 'eos',
+    contract: dev ? 'd.pfp.pomelo' : 'pfp.pomelo',
+    login: dev ? 'd.login.eosn' : 'login.eosn',
+    tables: ['avatars', 'borders', 'banners'],
+    owner: account ?? ''
+  };
+  const resp = await axios.get(EDGE_BASE_URL + `/pfp.pomelo/profiles?${Object.entries(params).map(([key, value]) => Array.isArray(value) ? value.map((p: any) => `${key}=${p}`).join('&') : `${key}=${value}`).join('&')}`) as any;
+  let res: {[key: string]: Profile} = {};
+  for (const pfp of ['avatar', 'border', 'banner'] as const) {
+    res = resp.data[`${pfp}s`].reduce((acc: {[key: string]: Profile}, cur: any) => {
+      (acc[cur.owner] ??= {owner: '', avatar: {}, border: {}, banner: {}})[pfp] = cur;
+      if (!acc[cur.owner].eosn_id && cur.user_id) acc[cur.owner].eosn_id = cur.user_id;
+      if (!acc[cur.owner].owner && cur) acc[cur.owner].owner = cur.owner;
+      return acc;
+    }, res)
   }
-  return results;
+  return Object.entries(res);
 }
 
 export async function get_grant_claims(round_id: number, eosn_id?: string, code = "claim.pomelo" ) {

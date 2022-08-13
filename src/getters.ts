@@ -89,7 +89,7 @@ export async function get_pfp_profiles(dev = false, account?: string) {
       return acc;
     }, res)
   }
-  return Object.entries(res);
+  return Object.values(res);
 }
 
 export async function get_grant_claims(round_id: number, eosn_id?: string, code = "claim.pomelo" ) {

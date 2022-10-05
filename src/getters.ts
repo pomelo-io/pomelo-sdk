@@ -74,7 +74,7 @@ export async function get_login_accounts(account?: string) {
 
 export async function get_pfp_profiles(dev = false, account?: string) {
   const params: any = { chain: 'eos',
-    contract: dev ? 'd.pfp.pomelo' : 'pfp.pomelo',
+    contract: /*dev ? 'd.pfp.pomelo' : */'pfp.pomelo',
     login: dev ? 'd.login.eosn' : 'login.eosn',
     tables: ['avatars', 'borders', 'banners'],
     owner: account ?? ''

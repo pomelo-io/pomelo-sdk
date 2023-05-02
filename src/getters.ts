@@ -3,7 +3,7 @@ import { Globals, Round, Season, Grant, Match, User, LoginAccount, Profile, Gran
 
 const FUNCTIONS_BASE_URL = 'https://functions.eosn.io/v1/pomelo/'
 const EDGE_BASE_URL = 'https://edge.pomelo.io/api'
-const EOSIO_BASE_URL = 'https://eos.eosn.io'
+const EOSIO_BASE_URL = 'https://eos.api.eosnation.io'
 
 export async function get_globals(): Promise<Globals> {
   const { data } = await axios.get<{rows: Globals[]}>(FUNCTIONS_BASE_URL + "globals");

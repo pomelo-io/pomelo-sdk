@@ -27,14 +27,16 @@ import * as pomelo from "pomelo-sdk"
 
 // Round Computations
 const match_value = 100000;
-const sum_square = 1578.29538956198575761;
-const divisor = pomelo.calculate_divisor(match_value, sum_square);
-// => 63.359495732767975
+const sum_square = 6815.9417537;
+const sum_value = 3010;
+const divisor = pomelo.calculate_divisor(match_value, sum_square, sum_value);
+// => 26.2747058341
 
 // Grant Computations
-const square = 706.30066043198416992;
-const grant_estimate = pomelo.calculate_grant_estimated_match(square, divisor);
-// => 44750.85368069151
+const sum_sqrt = 60.104076406;
+const sum_value = 1712.5;
+const grant_estimate = pomelo.calculate_grant_estimated_match(sum_sqrt, sum_value, divisor);
+// => 1900.0000
 
 // User Computations
 const value = 180
